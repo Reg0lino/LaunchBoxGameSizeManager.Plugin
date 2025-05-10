@@ -1,0 +1,58 @@
+# Visual Studio Code 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+ 
+# Visual Studio 
+*.obj 
+*.pdb 
+*.user 
+*.aps 
+*.pch 
+*.vspscc 
+*.vssscc 
+_UpgradeReport_Files 
+Backup* 
+TestResults 
+*.psess 
+*.vsp 
+*.vspx 
+*.suo 
+ 
+# User-specific files 
+*.DS_Store 
+ 
+# Build results 
+[Bb]in/ 
+[Oo]bject/ 
+[Rr]elease/ 
+[Dd]ebug/ 
+x64/ 
+x86/ 
+build/ 
+Build/ 
+build_output/ 
+ 
+# NuGet Packages 
+**/packages/* 
+!**/packages/repositories.config 
+obj/project.assets.json 
+obj/project.packagespec.json 
+ 
+# LaunchBox Specific (if plugin is built in place, though not recommended for source) 
+*.dll 
+*.exe 
+ 
+# Lib folder - if you check in dependencies, uncomment the next line and add exceptions 
+# lib/ 
+!lib/README.md 
+ 
+# Rider 
+.idea/ 
+*.sln.iml 
+
+
+.vs/
+/LaunchboxGameSizeManager.Plugin/.vs/
