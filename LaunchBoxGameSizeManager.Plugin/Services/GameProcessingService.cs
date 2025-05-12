@@ -1,52 +1,41 @@
+// In GameProcessingService.cs
 using System;
-using System.Threading.Tasks; // Required for Task
-using Unbroken.LaunchBox.Plugins; // For PluginHelper for logging if needed
-using LaunchBoxGameSizeManager.Utils; // For Constants
-// Add any other necessary using directives based on its actual implementation
+using System.Threading.Tasks;
+using LaunchBoxGameSizeManager.Services; // If needed for other methods
+using LaunchBoxGameSizeManager.Utils;   // For Constants
 
 namespace LaunchBoxGameSizeManager.Services
 {
     public class GameProcessingService
     {
-        private readonly LaunchBoxDataService _lbDataService;
-        private readonly FileSystemService _fileSystemService;
+        // Constructor and other fields remain if they are used by other potential methods.
+        // If this class is ONLY for ScanPlatformGameSizesAsync and that method is now a shell,
+        // you might not need _lbDataService and _fileSystemService fields here anymore.
 
-        // Constructor to match how it's called in GameSizeManagerPlugin
+        private readonly LaunchBoxDataService _lbDataService; // Keep if used by other methods
+        private readonly FileSystemService _fileSystemService; // Keep if used by other methods
+
         public GameProcessingService(LaunchBoxDataService lbDataService, FileSystemService fileSystemService)
         {
             _lbDataService = lbDataService ?? throw new ArgumentNullException(nameof(lbDataService));
             _fileSystemService = fileSystemService ?? throw new ArgumentNullException(nameof(fileSystemService));
-            PluginHelper.LogHelper.Log("GameProcessingService initialized (Placeholder).", Constants.PluginName, LogLevel.Debug);
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine($"[{Constants.PluginName}] GameProcessingService constructor (if still used).");
+#endif
         }
 
-        // Placeholder for the async method
-        // The actual implementation would iterate games, calculate sizes, and update LaunchBox
         public async Task ScanPlatformGameSizesAsync(string platformName, Action<string> reportProgress)
         {
-            PluginHelper.LogHelper.Log($"ScanPlatformGameSizesAsync called for platform: {platformName} (Placeholder - No actual scanning will occur).", Constants.PluginName, LogLevel.Info);
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine($"[{Constants.PluginName}] ScanPlatformGameSizesAsync (in GameProcessingService - now a shell) called for platform: {platformName}.");
+#endif
+            reportProgress?.Invoke($"Scan (from GameProcessingService shell) for {platformName} starting...");
 
-            reportProgress?.Invoke($"Starting scan for {platformName} (Placeholder)...");
+            // This method is now largely superseded by logic in GameSizeManagerPlugin.ProcessGames.
+            // If it needs to remain async, it needs an await.
+            await Task.CompletedTask; // Satisfies the async warning if no other await is present.
 
-            // Simulate some work
-            await Task.Delay(1000); // Simulate some async work
-
-            // Example of how you might get games (actual logic would be more complex)
-            // var games = _lbDataService.GetGamesForPlatform(platformName);
-            // int count = 0;
-            // foreach (var game in games)
-            // {
-            //     reportProgress?.Invoke($"Processing game {++count}: {game.Title} (Placeholder)");
-            //     // Actual size calculation and update logic would go here
-            //     await Task.Delay(50); // Simulate per-game work
-            // }
-
-            reportProgress?.Invoke($"Scan for {platformName} complete (Placeholder).");
-            PluginHelper.LogHelper.Log($"Scan for '{platformName}' has finished processing (Placeholder).", Constants.PluginName, LogLevel.Info);
-
-            // In a real scenario, you'd call PluginUIManager.ShowInformation here or similar
-            // For now, the GameSizeManagerPlugin handles the final ShowInformation.
+            reportProgress?.Invoke($"Scan (from GameProcessingService shell) for {platformName} complete.");
         }
-
-        // Add any other methods that GameProcessingService is supposed to have
     }
 }

@@ -8,11 +8,12 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LaunchBoxGameSizeManager</RootNamespace>
-    <!-- Changed RootNamespace for consistency with your using statements -->
     <AssemblyName>LaunchBoxGameSizeManager.Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <!-- Add this to use the newer packages.config restore mechanism if you have a packages.config -->
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,11 +36,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <!-- Ensure this is present for .NET Framework drawing -->
-    <!-- REMOVED direct reference to System.Drawing.Common -->
-    <!-- <Reference Include="System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" /> -->
+    <!-- System.Drawing.Common will be handled by NuGet PackageReference -->
+    <!-- Crucial for System.Drawing.Image from .NET Framework -->
     <Reference Include="System.Windows.Forms" />
-    <!-- Ensure this is present for WinForms UI -->
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,54 +46,61 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Unbroken.LaunchBox.Plugins">
-      <!-- Simplified, Version is good but not strictly needed here if HintPath is correct -->
       <SpecificVersion>False</SpecificVersion>
-      <!-- This is fine, allows for minor LB updates -->
       <HintPath>lib\Unbroken.LaunchBox.Plugins.dll</HintPath>
-      <!-- Ensure this path is correct relative to the .csproj file -->
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CorePlugin\GameSizeManagerPlugin.cs" />
+    <Compile Include="UI\ErrorReportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\PlatformActionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\GameSizeMenuItem.cs" />
     <Compile Include="Models\DeleteOperationType.cs" />
     <Compile Include="Models\GameSizeInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\ScanOptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Services\FileSystemService.cs" />
     <Compile Include="Services\GameProcessingService.cs" />
     <Compile Include="Services\LaunchBoxDataService.cs" />
+    <Compile Include="Utils\GamePathLogic.cs" />
+    <Compile Include="Utils\SizeTierGenerator.cs" />
     <Compile Include="UI\PluginUIManager.cs" />
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\FormatHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <!-- It's generally better not to include files from 'lib' directly as 'None' if they are dependencies.
-         The <Reference> with <HintPath> handles the DLL.
-         If README.md is just for developer info, this is fine. -->
+    <None Include="app.config" Condition="Exists('app.config')" />
+    <!-- Optional: only if you have one -->
     <None Include="lib\README.md" />
+    <!-- packages.config is used if RestoreProjectStyle is not PackageReference or if you explicitly use it -->
+    <!-- If you are using PackageReference exclusively, you might not have/need this file -->
+    <None Include="packages.config" Condition="Exists('packages.config')" />
   </ItemGroup>
   <ItemGroup>
-    <!-- DLLs that are references should generally not be 'Content'.
-         The <Reference> with <HintPath> is the correct way to reference DLLs.
-         This <Content> item can cause the DLL to be copied to the output again,
-         which is usually harmless but redundant if already handled by the reference.
-         Consider removing this if Unbroken.LaunchBox.Plugins.dll is only a build-time reference
-         and LaunchBox provides it at runtime. If you need to bundle it (not typical for LB plugins),
-         there are other ways. For now, leaving it might be okay but it's not standard for references.
-         If Unbroken.LaunchBox.Plugins.dll is in the GAC or LB's runtime dir, HintPath makes it found at build time.
-    -->
-    <!-- <Content Include="lib\Unbroken.LaunchBox.Plugins.dll" /> -->
-    <!-- Consider removing this line -->
-    <Content Include="lib\Unbroken.LaunchBox.Plugins.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <!-- Folders for bin/obj are usually not explicitly listed as they are managed by the build process.
-         The 'docs' folder is fine if it contains documentation you want to track with the project.
-         If these <Folder> includes were added by "Show All Files" -> "Include in Project",
-         they are generally harmless but not strictly necessary. -->
-    <!-- <Folder Include="bin\Debug\" /> -->
-    <!-- <Folder Include="bin\Release\" /> -->
-    <!-- If you have actual documents here -->
+    <!-- If 'docs' contains actual documentation files, this is fine -->
     <Folder Include="docs\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\Unbroken.LaunchBox.Plugins.dll" />
+    <EmbeddedResource Include="plugin_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common">
+      <Version>9.0.4</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

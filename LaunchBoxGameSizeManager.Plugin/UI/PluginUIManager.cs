@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Drawing; // Required for Point, Size, etc.
-using Unbroken.LaunchBox.Plugins; // For PluginHelper for logging potentially
+using System.Windows.Forms; 
+// using Unbroken.LaunchBox.Plugins; // Not needed if PluginHelper logging is removed or replaced
+using LaunchBoxGameSizeManager.Utils; 
 
 namespace LaunchBoxGameSizeManager.UI
 {
@@ -9,46 +10,46 @@ namespace LaunchBoxGameSizeManager.UI
     {
         public static string ShowPlatformSelectionDialog(IEnumerable<string> platformNames)
         {
-            using (Form prompt = new Form())
+            Form prompt = new Form()
             {
-                prompt.Width = 350;
-                prompt.Height = 150;
-                prompt.FormBorderStyle = FormBorderStyle.FixedDialog;
-                prompt.Text = "Select Platform to Scan";
-                prompt.StartPosition = FormStartPosition.CenterScreen;
-                prompt.ControlBox = false; // Remove minimize/maximize buttons
-
-                Label textLabel = new Label() { Left = 20, Top = 20, Text = "Choose a platform:", Width = 300 };
-                ComboBox comboBox = new ComboBox() { Left = 20, Top = 45, Width = 300, DropDownStyle = ComboBoxStyle.DropDownList };
-                foreach (var platformName in platformNames)
-                {
-                    comboBox.Items.Add(platformName);
-                }
-                if (comboBox.Items.Count > 0)
-                {
-                    comboBox.SelectedIndex = 0;
-                }
-
-                Button confirmation = new Button() { Text = "Scan", Left = 140, Width = 80, Top = 80, DialogResult = DialogResult.OK };
-                Button cancellation = new Button() { Text = "Cancel", Left = 230, Width = 80, Top = 80, DialogResult = DialogResult.Cancel };
-
-                confirmation.Click += (sender, e) => { prompt.Close(); };
-                cancellation.Click += (sender, e) => { prompt.Close(); };
-
-                prompt.Controls.Add(textLabel);
-                prompt.Controls.Add(comboBox);
-                prompt.Controls.Add(confirmation);
-                prompt.Controls.Add(cancellation);
-                prompt.AcceptButton = confirmation;
-                prompt.CancelButton = cancellation;
-
-                return prompt.ShowDialog() == DialogResult.OK && comboBox.SelectedItem != null ? comboBox.SelectedItem.ToString() : null;
+                Width = 500,
+                Height = 180,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = $"{Constants.PluginName} - Select Platform",
+                StartPosition = FormStartPosition.CenterScreen,
+                MaximizeBox = false,
+                MinimizeBox = false
+            };
+            Label textLabel = new Label() { Left = 20, Top = 20, Width = 440, Text = "Available Platforms (select one and click OK, or type if list is too long):" };
+            ListBox listBox = new ListBox() { Left = 20, Top = 45, Width = 440, Height = 60 };
+            foreach (var platform in platformNames)
+            {
+                listBox.Items.Add(platform);
             }
+            if (listBox.Items.Count > 0)
+            {
+                listBox.SelectedIndex = 0;
+            }
+
+            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 110, DialogResult = DialogResult.OK };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(listBox);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+
+            System.Diagnostics.Debug.WriteLine($"[{Constants.PluginName}] Displaying platform selection dialog."); // Fallback logging
+            return prompt.ShowDialog() == DialogResult.OK && listBox.SelectedItem != null ? listBox.SelectedItem.ToString() : string.Empty;
         }
 
         public static void ShowInformation(string title, string message)
         {
             MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void ShowWarning(string title, string message)
+        {
+            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         public static void ShowError(string title, string message)
@@ -58,7 +59,8 @@ namespace LaunchBoxGameSizeManager.UI
 
         public static bool ShowConfirmation(string title, string message)
         {
-            return MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+            DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return result == DialogResult.Yes;
         }
     }
 }

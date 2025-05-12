@@ -1,34 +1,45 @@
-# LaunchBox Game Size and Cleanup Plugin - Project Mission 
- 
-"This project aims to create a LaunchBox plugin to help users manage their game library by:" 
-"- Accurately calculating and displaying the disk space used by Windows game installations and ROM files." 
-"- Allowing users to select a specific platform for scanning." 
-"- Storing the calculated size in a custom LaunchBox game field for sorting and display." 
-"- Providing options to manage games based on size, including:" 
-"  - Opening game location in Explorer." 
-"  - Safely removing game entries from LaunchBox (keeping files)." 
-"  - Deleting game files and associated media (with strong warnings and user confirmation)." 
-"  - Permanently deleting game entries, files, and all associated media (with strongest warnings)." 
-"- All disk-intensive operations should be performed on background threads to keep LaunchBox responsive." 
-"- The plugin should be developed using C# and the .NET Framework, targeting the LaunchBox Plugin API." 
- 
-## Project Structure 
- 
-- **/docs/**: Contains project documentation, design notes, etc. 
-- **/lib/**: Will hold external libraries, specifically `Unbroken.LaunchBox.Plugins.dll`. 
-- **/src/**: Contains all the source code for the plugin. 
-  - **/src/CorePlugin/**: Main plugin class, entry points. 
-  - **/src/Services/**: Business logic, LaunchBox API interaction, file system operations. 
-  - **/src/UI/**: UI elements, dialogs, and UI management. 
-  - **/src/Models/**: Data structures, enums (e.g., DeleteOperationType). 
-  - **/src/Utils/**: Helper classes, common functions (e.g., size formatting). 
-- **LaunchBoxGameSizeManager.sln**: (To be created by Visual Studio) The solution file. 
-- **LaunchBoxGameSizeManager.csproj**: (To be created by Visual Studio within src/CorePlugin or a dedicated project folder) The C# project file. 
- 
-## Development Notes 
- 
-- **Target Framework:** .NET Framework (check LaunchBox current requirements, likely 4.6.2 or higher). 
-- **Primary Language:** C# 
-- **Key Dependency:** `Unbroken.LaunchBox.Plugins.dll` (from your LaunchBox `Core` directory). Place this in the `/lib/` folder. 
-- **IDE:** Visual Studio (Community Edition is fine). 
-- **Version Control:** Git (initialize a repository in the LaunchBoxGameSizeManager root). 
+# LaunchBox Game Size Manager Plugin
+
+**Project Goal:** Develop a LaunchBox plugin to calculate, display, and manage game disk size information, helping users identify the storage footprint of their games, including estimates for uninstalled storefront titles.
+
+**Current Status:** Phase 2 Development (Storefront Integration)
+
+## Overview
+
+This plugin integrates with LaunchBox to provide detailed information about how much disk space your games occupy. It can scan local installations and ROM files, storing the calculated size directly within LaunchBox custom fields for easy viewing and sorting.
+
+## Core Features (Implemented - v1.0.0 Functionality)
+
+*   Calculates the size of local game installations, ROM files, and CUE sheet related files.
+*   Stores data in configurable LaunchBox custom fields:
+    *   `Game Size` (e.g., "1.23 GB")
+    *   `Game Size Last Scanned` (e.g., "MM/dd/yyyy")
+    *   `Game Size Tier` (e.g., "01) > 200 GB", for sorting)
+*   Integrates with LaunchBox via:
+    *   "Tools" menu for platform-wide scans/data clearing.
+    *   Game right-click context menu for operating on selected games.
+*   Provides dialogs for selecting scan options and viewing scan issue reports.
+*   Handles various path types, including specific logic for PC games, ROMs, and disc images.
+*   Identifies games linked via storefront URLs (Steam, Epic, GOG, etc.).
+*   Dark themed UI dialogs.
+
+## Current Development Focus (Phase 2)
+
+*   **Fetching Estimated Required Disk Space for Storefront Games:** Implementing functionality to query external databases (initially targeting the [RAWG API](https://rawg.io/apidocs)) to retrieve the "Required Disk Space" for games represented by storefront launcher URLs (e.g., `steam://rungameid/...`).
+    *   This data will be stored in a *new*, separate custom field (e.g., `"Est. Required Space"`).
+    *   Online lookups will be opt-in per scan and only performed for identified storefront games.
+    *   Requires a RAWG API key for the lookup functionality (details on setup TBD - currently requires placing key in `RAWG_API.txt` in project root, which is gitignored).
+
+## Technology
+
+*   C# (.NET Framework 4.7.2)
+*   Windows Forms (for UI dialogs)
+*   Unbroken.LaunchBox.Plugins API (v13.21.0.0)
+
+## Setup & Installation (Placeholder)
+
+*(Instructions for building the plugin from source or installing a release package will go here once available.)*
+
+---
+
+*Developed by: [reg0lino]*
