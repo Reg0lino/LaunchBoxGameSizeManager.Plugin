@@ -1,58 +1,98 @@
-# Visual Studio Code 
-.vscode/* 
-!.vscode/settings.json 
-!.vscode/tasks.json 
-!.vscode/launch.json 
-!.vscode/extensions.json 
- 
-# Visual Studio 
-*.obj 
-*.pdb 
-*.user 
-*.aps 
-*.pch 
-*.vspscc 
-*.vssscc 
-_UpgradeReport_Files 
-Backup* 
-TestResults 
-*.psess 
-*.vsp 
-*.vspx 
-*.suo 
- 
-# User-specific files 
-*.DS_Store 
- 
-# Build results 
-[Bb]in/ 
-[Oo]bject/ 
-[Rr]elease/ 
-[Dd]ebug/ 
-x64/ 
-x86/ 
-build/ 
-Build/ 
-build_output/ 
- 
-# NuGet Packages 
-**/packages/* 
-!**/packages/repositories.config 
-obj/project.assets.json 
-obj/project.packagespec.json 
- 
-# LaunchBox Specific (if plugin is built in place, though not recommended for source) 
-*.dll 
-*.exe 
- 
-# Lib folder - if you check in dependencies, uncomment the next line and add exceptions 
-# lib/ 
-!lib/README.md 
- 
-# Rider 
-.idea/ 
-*.sln.iml 
+# Visual Studio Code/Editor specific files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
 
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache files
 .vs/
-/LaunchboxGameSizeManager.Plugin/.vs/
+*.njsproj.user
+*.pubxml.user
+
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+# except build/.nupkg
+!**/packages/build/*.nupkg
+# Cache files created by Nuget
+*.nuget.props
+*.nuget.targets
+
+# My specific exclusions
+# IMPORTANT: Ignore your API key file!
+RAWG_API.txt 
+# Or if you put it elsewhere, adjust the path: e.g. /config/RAWG_API.txt
+
+# Others
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.log
+*.scc
+
+# Service Fabric specific files
+*.[Ss][Ff][Pp]roj.user
+
+# Windows Installer files
+*.wixproj.user
+
+# FSharp project cache
+.fsharp.cache
+
+# Rider specific files
+.idea/
+*.sln.iml
+
+# Backup files from Visual Studio
+*.[Bb]ak
+
+# ReSharper specific files
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+/LaunchBoxGameSizeManager.Plugin/RARG_API.txt
