@@ -1,99 +1,58 @@
-# Visual Studio Code/Editor specific files
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
-
-# User-specific files
-*.rsuser
+# Visual Studio IDE
+.vs/
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+*.csproj.user
 
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
+# Visual Studio Code
+.vscode/
 
-# Visual Studio cache files
-.vs/
-*.njsproj.user
-*.pubxml.user
-
-# NuGet Packages
-*.nupkg
-# The packages folder can be ignored because of Package Restore
-**/packages/*
-# except build/.nupkg
-!**/packages/build/*.nupkg
-# Cache files created by Nuget
-*.nuget.props
-*.nuget.targets
-
-# My specific exclusions
-# IMPORTANT: Ignore your API key file!
-RAWG_API.txt 
-# Or if you put it elsewhere, adjust the path: e.g. /config/RAWG_API.txt
-
-# Others
-*_i.c
-*_p.c
-*_h.h
-*.ilk
-*.meta
-*.obj
-*.pch
-*.pdb
-*.pgc
-*.pgd
-*.rsp
-*.sbr
-*.tlb
-*.tli
-*.tlh
-*.tmp
-*.tmp_proj
-*.log
-*.vspscc
-*.vssscc
-.builds
-*.pidb
-*.log
-*.scc
-
-# Service Fabric specific files
-*.[Ss][Ff][Pp]roj.user
-
-# Windows Installer files
-*.wixproj.user
-
-# FSharp project cache
-.fsharp.cache
-
-# Rider specific files
+# Rider
 .idea/
-*.sln.iml
 
-# Backup files from Visual Studio
-*.[Bb]ak
-
-# ReSharper specific files
+# ReSharper
 _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
-/LaunchBoxGameSizeManager.Plugin/RARG_API.txt
-/LaunchBoxGameSizeManager.Plugin/RARG_API_KEY.txt
+
+# Build Artifacts
+[Bb]in/
+[Oo]bj/
+
+# NuGet Packages folder (restored on build)
+**/packages/*
+# (Uncomment next line if you don't want to commit packages.config)
+# packages.config 
+
+# Log files
+*.log
+[Ll]ogs/
+[Ll]og/
+
+# API Key Files (case-insensitive for Windows)
+*[Aa][Pp][Ii]_[Kk][Ee][Yy].txt
+*[Aa][Pp][Ii].txt 
+# Covers RAWG_API_KEY.txt, RARG_API_KEY.txt, RAWG_API.txt, etc. in any directory.
+
+# OS Generated Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.DS_Store
+
+# Temporary & Backup Files
+*.tmp
+*.bak
+*.old
+
+# Other common files to ignore
+*.nupkg
+*.nuget.props
+*.nuget.targets
+*.pidb
+*.scc
+*.vspscc
+*.vssscc
