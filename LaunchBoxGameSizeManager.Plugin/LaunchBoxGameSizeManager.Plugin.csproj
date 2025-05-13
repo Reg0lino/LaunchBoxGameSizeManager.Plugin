@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CorePlugin\GameSizeManagerPlugin.cs" />
+    <Compile Include="Services\StorefrontInfoService.cs" />
     <Compile Include="UI\ErrorReportDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +69,7 @@
     <Compile Include="Services\FileSystemService.cs" />
     <Compile Include="Services\GameProcessingService.cs" />
     <Compile Include="Services\LaunchBoxDataService.cs" />
+    <Compile Include="Utils\FileLogger.cs" />
     <Compile Include="Utils\GamePathLogic.cs" />
     <Compile Include="Utils\SizeTierGenerator.cs" />
     <Compile Include="UI\PluginUIManager.cs" />
@@ -91,6 +93,9 @@
     <EmbeddedResource Include="plugin_icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
     <PackageReference Include="System.Drawing.Common">
       <Version>9.0.4</Version>
     </PackageReference>
