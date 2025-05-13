@@ -25,9 +25,11 @@ A LaunchBox plugin to calculate, display, and manage game disk size information,
 
 **Quick Install Steps (Detailed instructions are in the release download):**
 1. Download the `.zip` file from the [Releases page](https://github.com/reg0lino/LaunchBoxGameSizeManager.Plugin/releases).
-2. Extract the `GameSizeManager` folder into your `LaunchBox\Plugins\` directory.
-3. Create `RAWG_API_KEY.txt` in the `LaunchBox\Plugins\GameSizeManager\` folder with your RAWG.io API key.
-4. Restart LaunchBox.
+2. Right-click the zip folder, select Properties, and check UNBLOCK
+3. Extract the `GameSizeManager` folder into your `LaunchBox\Plugins\` directory.
+4. DOUBLE CHECK THE .DLL FILES AND MAKE SURE THEY ARE UNBLOCKED IN PROPERTIES (I CAN NOT STRESS THIS ENOUGH)
+5. Create `RAWG_API_KEY.txt` in the `LaunchBox\Plugins\GameSizeManager\` folder with your RAWG.io API key.
+6. Restart LaunchBox.
 
 ---
 
