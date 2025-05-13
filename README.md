@@ -2,7 +2,6 @@
 
 **Author:** RegularRegs (reg0lino on GitHub)
 **Current Version:** 1.0.0 
-*(Link to Releases will go here)*
 
 A LaunchBox plugin to calculate, display, and manage game disk size information, including fetching estimated required space from online sources.
 
