@@ -13,9 +13,9 @@ A LaunchBox plugin to calculate, display, and manage game disk size information,
 *   Calculates local game installation/ROM sizes.
 *   Fetches estimated required disk space via RAWG.io API.
 *   Stores data in custom fields: `Game Size`, `Game Size Tier`, `Est. Required Space`, `Game Size Last Scanned`.
-*   UI integration via Tools menu and game context menu.
+*   UI integration via Tools menu and Game Context menu. (Right Click)
 *   Configurable scan options.
-*   Error reporting.
+*   Error reporting. (txt files inside plugin folder)
 
 ---
 
@@ -23,7 +23,6 @@ A LaunchBox plugin to calculate, display, and manage game disk size information,
 
 **➡️ [Click here to go to the LATEST RELEASE for download and detailed instructions](https://github.com/reg0lino/LaunchBoxGameSizeManager.Plugin/releases)**
 
-*(This link is crucial. Your release ZIPs will contain the detailed README.txt/md we drafted previously with step-by-step install/usage.)*
 
 **Quick Install Steps (Detailed instructions are in the release download):**
 1. Download the `.zip` file from the [Releases page](https://github.com/reg0lino/LaunchBoxGameSizeManager.Plugin/releases).
@@ -63,7 +62,6 @@ This section is for those who wish to build the plugin from its source code.
 
 ## Contributing
 
-*(Optional: Add guidelines if you wish to accept community contributions, e.g., how to submit pull requests, coding style.)*
 Currently, please report issues or suggest features via the [GitHub Issues page](https://github.com/reg0lino/LaunchBoxGameSizeManager.Plugin/issues).
 
 ---
