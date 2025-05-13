@@ -1,45 +1,73 @@
-# LaunchBox Game Size Manager Plugin
+# Game Size Manager Plugin for LaunchBox
 
-**Project Goal:** Develop a LaunchBox plugin to calculate, display, and manage game disk size information, helping users identify the storage footprint of their games, including estimates for uninstalled storefront titles.
+**Author:** RegularRegs (reg0lino on GitHub)
+**Current Version:** 1.0.0 
+*(Link to Releases will go here)*
 
-**Current Status:** Phase 2 Development (Storefront Integration)
-
-## Overview
-
-This plugin integrates with LaunchBox to provide detailed information about how much disk space your games occupy. It can scan local installations and ROM files, storing the calculated size directly within LaunchBox custom fields for easy viewing and sorting.
-
-## Core Features (Implemented - v1.0.0 Functionality)
-
-*   Calculates the size of local game installations, ROM files, and CUE sheet related files.
-*   Stores data in configurable LaunchBox custom fields:
-    *   `Game Size` (e.g., "1.23 GB")
-    *   `Game Size Last Scanned` (e.g., "MM/dd/yyyy")
-    *   `Game Size Tier` (e.g., "01) > 200 GB", for sorting)
-*   Integrates with LaunchBox via:
-    *   "Tools" menu for platform-wide scans/data clearing.
-    *   Game right-click context menu for operating on selected games.
-*   Provides dialogs for selecting scan options and viewing scan issue reports.
-*   Handles various path types, including specific logic for PC games, ROMs, and disc images.
-*   Identifies games linked via storefront URLs (Steam, Epic, GOG, etc.).
-*   Dark themed UI dialogs.
-
-## Current Development Focus (Phase 2)
-
-*   **Fetching Estimated Required Disk Space for Storefront Games:** Implementing functionality to query external databases (initially targeting the [RAWG API](https://rawg.io/apidocs)) to retrieve the "Required Disk Space" for games represented by storefront launcher URLs (e.g., `steam://rungameid/...`).
-    *   This data will be stored in a *new*, separate custom field (e.g., `"Est. Required Space"`).
-    *   Online lookups will be opt-in per scan and only performed for identified storefront games.
-    *   Requires a RAWG API key for the lookup functionality (details on setup TBD - currently requires placing key in `RAWG_API.txt` in project root, which is gitignored).
-
-## Technology
-
-*   C# (.NET Framework 4.7.2)
-*   Windows Forms (for UI dialogs)
-*   Unbroken.LaunchBox.Plugins API (v13.21.0.0)
-
-## Setup & Installation (Placeholder)
-
-*(Instructions for building the plugin from source or installing a release package will go here once available.)*
+A LaunchBox plugin to calculate, display, and manage game disk size information, including fetching estimated required space from online sources.
 
 ---
 
-*Developed by: [reg0lino]*
+## Features
+
+*   Calculates local game installation/ROM sizes.
+*   Fetches estimated required disk space via RAWG.io API.
+*   Stores data in custom fields: `Game Size`, `Game Size Tier`, `Est. Required Space`, `Game Size Last Scanned`.
+*   UI integration via Tools menu and game context menu.
+*   Configurable scan options.
+*   Error reporting.
+
+---
+
+## Installation & Usage (For Users)
+
+**➡️ [Click here to go to the LATEST RELEASE for download and detailed instructions](https://github.com/reg0lino/LaunchBoxGameSizeManager.Plugin/releases)**
+
+*(This link is crucial. Your release ZIPs will contain the detailed README.txt/md we drafted previously with step-by-step install/usage.)*
+
+**Quick Install Steps (Detailed instructions are in the release download):**
+1. Download the `.zip` file from the [Releases page](https://github.com/reg0lino/LaunchBoxGameSizeManager.Plugin/releases).
+2. Extract the `GameSizeManager` folder into your `LaunchBox\Plugins\` directory.
+3. Create `RAWG_API_KEY.txt` in the `LaunchBox\Plugins\GameSizeManager\` folder with your RAWG.io API key.
+4. Restart LaunchBox.
+
+---
+
+## For Developers / Building from Source
+
+This section is for those who wish to build the plugin from its source code.
+
+**Prerequisites:**
+*   Visual Studio 2019 or newer (Community Edition is fine).
+*   .NET Framework 4.7.2 Developer Pack.
+*   A copy of `Unbroken.LaunchBox.Plugins.dll` (v13.21.0.0 or compatible) from your LaunchBox `Core` directory, placed into the `lib` folder of this project (or adjust project reference).
+*   A copy of `Newtonsoft.Json.dll` (the version referenced by the project, obtainable via NuGet) available or ensure NuGet package restore is working.
+
+**Build Steps:**
+1. Clone this repository: `git clone https://github.com/reg0lino/LaunchBoxGameSizeManager.Plugin.git`
+2. Open `LaunchBoxGameSizeManager.Plugin.sln` in Visual Studio.
+3. Ensure the reference to `Unbroken.LaunchBox.Plugins.dll` is correct.
+4. Restore NuGet packages (if `Newtonsoft.Json.dll` is managed via packages.config).
+5. Select the desired build configuration (Debug or Release).
+6. Build the solution (Build -> Build Solution).
+7. The output DLL will be in `bin\[Configuration]\LaunchBoxGameSizeManager.Plugin.dll`.
+
+**Project Structure:**
+*   `/CorePlugin`: Main plugin logic.
+*   `/Services`: Data access, file system operations, API communication.
+*   `/UI`: Windows Forms dialogs.
+*   `/Utils`: Helper classes and constants.
+*   `/lib`: (Intended for LaunchBox API DLL - not committed to repo).
+
+---
+
+## Contributing
+
+*(Optional: Add guidelines if you wish to accept community contributions, e.g., how to submit pull requests, coding style.)*
+Currently, please report issues or suggest features via the [GitHub Issues page](https://github.com/reg0lino/LaunchBoxGameSizeManager.Plugin/issues).
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details.
